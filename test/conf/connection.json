@@ -1,0 +1,25 @@
+{
+    "mysql": {
+        "*" : {
+            "master": [{
+                "host": "10.0.0.10",
+                "port": 33306,
+                "user": "davdian",
+                "password": "davdian"
+            }],
+            "slave": [{
+                "host": "10.0.0.10",
+                "port": 33306,
+                "user": "davdian",
+                "password": "davdian"
+            }]
+        }
+    },
+    "redis": {
+        "*" : {
+            "host": "10.0.0.10",
+            "port": 6379,
+            "password": "123456"
+        }
+    }
+}
