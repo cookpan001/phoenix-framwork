@@ -1,20 +1,20 @@
 {
-    "name": "dvd/phoenix-test",
+    "name": "cookpan001/phoenix-test",
     "type": "project",
     "authors": [
         {
             "name": "zhupeng",
-            "email": "zhupeng@davdian.com"
+            "email": "zhupeng@cookpan001.com"
         }
     ],
     "repositories": [
         {
             "type": "vcs",
-            "url": "git@gitlab.rd.vyohui.com:php/phoenix.git"
+            "url": "https://github.com/cookpan001/phoenix-framwork.git"
         }
     ],
     "require": {
-        "davdian/phoenix": "1.1.x-dev"
+        "cookpan001/phoenix": "dev-master"
     },
     "autoload": {
         "psr-4": {
@@ -36,13 +36,13 @@
             "php -r \"mkdir('app/Queue');\"",
             "php -r \"mkdir('app/Middleware');\"",
             "php -r \"file_put_contents('conf/application_name', 'default');\"",
-            "php -r \"copy('vendor/davdian/phoenix/src/samples/index.php', 'index.php');\"",
-            "php -r \"copy('vendor/davdian/phoenix/src/samples/application.ini', 'conf/application.ini');\"",
-            "php -r \"copy('vendor/davdian/phoenix/src/samples/tables.json', 'conf/tables.json');\"",
-            "php -r \"copy('vendor/davdian/phoenix/src/samples/phoenix.sh', 'server/swoole.sh');\"",
-            "php -r \"copy('vendor/davdian/phoenix/src/samples/IndexController.php', 'app/Controller/IndexController.php');\"",
-            "php -r \"copy('vendor/davdian/phoenix/src/samples/Auth.php', 'app/Middleware/Auth.php');\"",
-            "php -r \"copy('vendor/davdian/phoenix/src/samples/TablesData.php', 'app/Data/TablesData.php');\""
+            "php -r \"copy('vendor/cookpan001/phoenix/src/samples/index.php', 'index.php');\"",
+            "php -r \"copy('vendor/cookpan001/phoenix/src/samples/application.ini', 'conf/application.ini');\"",
+            "php -r \"copy('vendor/cookpan001/phoenix/src/samples/tables.json', 'conf/tables.json');\"",
+            "php -r \"copy('vendor/cookpan001/phoenix/src/samples/phoenix.sh', 'server/swoole.sh');\"",
+            "php -r \"copy('vendor/cookpan001/phoenix/src/samples/IndexController.php', 'app/Controller/IndexController.php');\"",
+            "php -r \"copy('vendor/cookpan001/phoenix/src/samples/Auth.php', 'app/Middleware/Auth.php');\"",
+            "php -r \"copy('vendor/cookpan001/phoenix/src/samples/TablesData.php', 'app/Data/TablesData.php');\""
         ]
     }
 }
