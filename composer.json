@@ -4,8 +4,8 @@
     "description": "PHP Framework based on swoole",
     "authors": [
         {
-            "name": "zhupeng",
-            "email": "zhupeng@davdian.com"
+            "name": "cookpan001",
+            "email": "cookpan001@gmail.com"
         }
     ],
     "autoload": {
