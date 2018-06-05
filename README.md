@@ -4,9 +4,9 @@ PHP Framework Based on Swoole
 - 无SQL
 - 整合Http, Redis, WebSocket三种协议
 # 需要安装以下扩展
-swoole
-redis[optional]
-mongodb[optional]
+- swoole
+- redis[optional]
+- mongodb[optional]
 
 # 使用方法
 1. 以samples里的composer.json为参考, 修改命名空间和所在目录
@@ -47,7 +47,7 @@ mongodb[optional]
 │   │   │   ├── Redis.php   [Redis封装，可以使用redis扩展, predis, 及下面的redis客户端]
 │   │   │   └── Watcher.php [观察者]
 │   │   ├── pool
-│   │   │   └── MysqlPool.php [todo数据库连接池]
+│   │   │   └── MysqlPool.php [TODO: 数据库连接池]
 │   │   ├── route
 │   │   │   ├── Dispatcher.php  [请求分发器，根据REQUEST_URI派发请求]
 │   │   │   ├── Request.php     [封装请求]
@@ -64,12 +64,7 @@ mongodb[optional]
 │   │   ├── phoenix.sh  [启动脚本]
 │   │   └── tables.json [分库分表配置]
 │   ├── service
-│   │   ├── http
-│   │   │   └── Server.php[http服务器，抽象类]
-│   │   ├── tcp
-│   │   │   └── Server.php
-│   │   └── websocket
-│   │       └── Server.php
+│   │   ├── SuperServer.php
 │   └── web
 │       ├── Debug.php   [页面调试工具入口]
 │       └── debug.html
@@ -89,16 +84,3 @@ http://127.0.0.1:9501/_routes
 
 # HTTP调试模式, 打开调试模式后，所有的log都会输出在页面端
 http://127.0.0.1:9501/?__DAVDIAN_DEBUG__=110
-
-# 性能对比
-
-|方法|并发量|
-
-| -------- | :----: |
-|swoole yaf|10101.32|
-|swoole phoenix|10039.46|
-|nginx swoole phoenix|4902.20|
-|openresty|3074.67|
-|Yaf|2087.30|
-|phoenix|1617.47|
-|lumen|254.16|
