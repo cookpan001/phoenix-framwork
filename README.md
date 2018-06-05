@@ -70,8 +70,8 @@ PHP Framework Based on Swoole
 │       └── debug.html
 ```
 # 简单开始，一个简单的服务在test中
-cd test
-php index.php
+- cd test
+- php index.php
 
 # 代码调试工具, 可以在浏览器中调试代码
 http://127.0.0.1:9501/_debug
