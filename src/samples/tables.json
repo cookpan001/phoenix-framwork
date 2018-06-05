@@ -1,0 +1,9 @@
+{
+    "user": {
+        "primary": "id",
+        "type": "mod",
+        "database": {
+            "main": 2
+        }
+    }
+}

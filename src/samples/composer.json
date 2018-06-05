@@ -1,0 +1,48 @@
+{
+    "name": "dvd/phoenix-test",
+    "type": "project",
+    "authors": [
+        {
+            "name": "zhupeng",
+            "email": "zhupeng@davdian.com"
+        }
+    ],
+    "repositories": [
+        {
+            "type": "vcs",
+            "url": "git@gitlab.rd.vyohui.com:php/phoenix.git"
+        }
+    ],
+    "require": {
+        "davdian/phoenix": "1.1.x-dev"
+    },
+    "autoload": {
+        "psr-4": {
+            "App\\": "app/"
+        }
+    },
+    "scripts": {
+        "post-create-project-cmd": [
+            "php -r \"mkdir('bin');\"",
+            "php -r \"mkdir('server');\"",
+            "php -r \"mkdir('app');\"",
+            "php -r \"mkdir('conf');\"",
+            "php -r \"mkdir('app/Logic');\"",
+            "php -r \"mkdir('app/Controller');\"",
+            "php -r \"mkdir('app/Component');\"",
+            "php -r \"mkdir('app/Data');\"",
+            "php -r \"mkdir('app/Config');\"",
+            "php -r \"mkdir('app/Job');\"",
+            "php -r \"mkdir('app/Queue');\"",
+            "php -r \"mkdir('app/Middleware');\"",
+            "php -r \"file_put_contents('conf/application_name', 'default');\"",
+            "php -r \"copy('vendor/davdian/phoenix/src/samples/index.php', 'index.php');\"",
+            "php -r \"copy('vendor/davdian/phoenix/src/samples/application.ini', 'conf/application.ini');\"",
+            "php -r \"copy('vendor/davdian/phoenix/src/samples/tables.json', 'conf/tables.json');\"",
+            "php -r \"copy('vendor/davdian/phoenix/src/samples/phoenix.sh', 'server/swoole.sh');\"",
+            "php -r \"copy('vendor/davdian/phoenix/src/samples/IndexController.php', 'app/Controller/IndexController.php');\"",
+            "php -r \"copy('vendor/davdian/phoenix/src/samples/Auth.php', 'app/Middleware/Auth.php');\"",
+            "php -r \"copy('vendor/davdian/phoenix/src/samples/TablesData.php', 'app/Data/TablesData.php');\""
+        ]
+    }
+}

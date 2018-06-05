@@ -1,0 +1,300 @@
+<?php
+use Phoenix\Framework\Route\Request;
+use Phoenix\Framework\Route\Response;
+?>
+<html>
+    <head>
+        <title>Phoenix Rest Tool</title>
+        <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+        <link rel="stylesheet" href="https://cdn.staticfile.org/codemirror/5.25.0/codemirror.min.css">
+        <link rel="stylesheet" href="https://cdn.staticfile.org/codemirror/5.25.0/theme/eclipse.min.css">
+        <style type="text/css">.CodeMirror {border-top: 1px solid black; border: 1px solid black; width: 600px; height: 90%;}</style>
+        <script src="https://cdn.staticfile.org/codemirror/5.25.0/codemirror.min.js"></script>
+        <script src="https://cdn.staticfile.org/codemirror/5.25.0/addon/edit/matchbrackets.min.js"></script>
+        <script src="https://cdn.staticfile.org/codemirror/5.25.0/mode/clike/clike.min.js"></script>
+        <script src="https://cdn.staticfile.org/codemirror/5.25.0/mode/php/php.min.js"></script>
+        <style>
+            .titleName{
+                width: 100%;
+                height: 50px;
+                text-align: center;
+                line-height: 50px;
+                font-size: 20px;
+                color: #3D9AD1;
+            }
+            #requestDev{
+                float: left;
+                width: 50%;
+                height: 90%;
+            }
+            #resultDiv{
+                width: 50%;
+                margin-left: 50%;
+                position: absolute;
+                height: 90%;
+            }
+            #result{
+                height: 95%;
+            }
+            #code_eval {
+                width: 100%;
+            }
+            textarea{
+                resize:none;
+                outline:none;
+                width: 86%;
+                border: 1px solid #314055;
+            }
+            .CodeMirror{
+                width: 85%;
+                margin-left: 1%;
+                border: 1px solid #314055;
+            }
+            .inputText{
+                width: 82%;
+                height: 30px;
+                margin-left:10px;
+                margin-bottom: 10px;
+                border: 1px solid #314055;
+            }
+            .buttonStyle{
+                width: 8%;
+                height:3%;
+                color: white;
+                margin-top: 10px;
+                margin-bottom: 10px;
+                font-size: 30%;
+                font-weight: bold;
+                background-color: #3D9AD1;
+                border: 1px solid #314055;
+            }
+            select{
+                width: 90%;
+                height: 30px;
+                margin-bottom: 10px;
+                border: 1px solid #314055;
+                font-size: 18px;
+            }
+            input[type="radio"] {
+                width: 20px;
+                height: 20px;
+            }
+        </style>
+    </head>
+    <body>
+        <div style="width:100%;">
+            <div id="requestDev">
+                <h3>Rest Request Form</h3>
+                <form method="GET" action="?" enctype="multipart/form-data" id='requestAjax'>
+                    <table border="1">
+                        <tr>
+                            <td>接口</td>
+                            <td><input type="text" name="url" size="80" value="<?php echo isset($_REQUEST['url']) ? $_REQUEST['url'] : ''; ?>" /></td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <select name="user">
+                                    <option value="user_id" selected="selected" >user_id</option>
+                                    <option value="sess_key">sess_key</option>
+                                </select>
+                            </td>
+                            <td><input type="text" name="user_id" size="25" value="<?php echo isset($_REQUEST['user_id']) ? $_REQUEST['user_id'] : ''; ?>" /> <a href="#ajax_interface" onclick='append(this);'>Add Param</a></td>
+                        </tr>
+                        <?php
+                            if(isset($_REQUEST['value'])){
+                                foreach($_REQUEST['value'] as $index => $v)
+                                {
+                                    $key = $_REQUEST['param'][$index];
+                                    if('' != $key && '' != $v)
+                                    {
+                                        $str = "<tr><td><input type='text' name='param[]' size=10 value='$key'/></td><td><input type='text' name='value[]' size='20' value='$v'/>";
+                                        $str .= "<a href='#ajax_interface' onclick='append(this);'>Add Param</a>&nbsp;&nbsp;";
+                                        $str .= "<a href='#ajax_interface' onclick='del(this);'>Del Param</a>";
+                                        $str .= "</td></tr>";
+                                        echo $str;
+                                    }
+                                }
+                            }
+                        ?>
+                        <tr>
+                            <td align='center' colspan="2">
+                                <input type="hidden" name="op" value="internal" />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td align='center' colspan="2">
+                                <button type="button" value="AjaxRequest" onclick="javascript: devObject.fillResult('Receiving data ...');ajaxInterface();" >AjaxRequest</button><br/>
+                            </td>
+                        </tr>
+                    </table>
+                </form>
+            </div>
+            <div id="resultDiv">
+                <h3 class="titleName">Operation result</h3>
+                <pre><?php $app->run(); ?></pre>
+            </div>
+        </div>
+    </body>
+    <script src="https://cdn.staticfile.org/jquery/3.2.1/jquery.min.js" ></script>
+    <script>
+        var devObject = {
+            'queryParse' : function(queryStr){
+                var arr = queryStr.split("&");
+                var ret = {};
+                for(var i in arr){
+                    var tmp = arr[i].split("=");
+                    var key = decodeURIComponent(tmp[0]);
+                    var value = decodeURIComponent(tmp[1]);
+                    var parsed = devObject.strParse(key, value);
+                    var left = key.indexOf('[');
+                    if(left !== -1){
+                        key = key.substring(0, left);
+                    }
+                    if(undefined === ret[key]){
+                        ret[key] = [];
+                    }
+                    if(parsed instanceof Array){
+                        if(undefined === ret[key]){
+                            ret[key] = parsed;
+                        }else{
+                            ret[key].concat(parsed);
+                        }
+                    }else if(parsed instanceof Object){
+                        for(var i in parsed){
+                            ret[key][i] = parsed[i];
+                        }
+                    }else{
+                        ret[key] = value;
+                    }
+                }
+                return ret;
+            },
+            'strParse' : function(key, value){
+                var left = key.indexOf('[');
+                var right = key.lastIndexOf(']');
+                if(left === -1 || right === -1){
+                    return value;
+                }
+                if(left === right -1){
+                    return new Array(value);
+                }
+                var subKey = key.substr(left + 1, right - left - 1);
+                var obj = {};
+                obj = {};
+                var subValue = devObject.strParse(subKey, value);
+                var subLeft = subKey.indexOf('[');
+                if(subLeft === -1){
+                    obj[subKey] = subValue;
+                }else{
+                    var subKey2 = subKey.substring(0,subLeft);
+                    obj[subKey][subKey2] = subValue;
+                }
+                return obj;
+            },
+            'fillResult' : function(ret){
+                $('#result').val(ret);
+            },
+            'init' : function(){
+                if(parseInt(devObject.rawOutput) > 0){
+                    $("#requestAjax input[name='rawOutput']").attr('checked','checked');
+                }
+                if(parseInt(devObject.proto) > 0){
+                    $("#requestAjax input[name='proto']").click();
+                }
+                $("select[name='user']").val(devObject.accountType);
+            }
+        };
+
+        function editCode(line)
+        {
+            devObject.fillResult('Receiving data ...');
+            $('#code_eval').find("textarea[name='code']").val(line);
+            devObject.ajaxRun();
+        }
+
+        function ajaxInterface()
+        {
+            var obj = {};
+            obj['url'] = $("#requestAjax input[name='url']").val();
+            obj['op'] = $("#requestAjax input[name='op']").val();
+            obj['user_id'] = $("#requestAjax input[name='user_id']").val();
+            obj['user'] = $("#requestAjax select[name='user']").val();
+            obj['param'] = [];
+            obj['value'] = [];
+            $("#requestAjax input[name='param[]']").each(function(idx,item){
+                obj['param'].push($(item).val());
+            });
+            $("#requestAjax input[name='value[]']").each(function(idx,item){
+                obj['value'].push($(item).val());
+            });
+            processInterface(obj);
+        }
+
+        function editInterface(param)
+        {
+            var obj = devObject.queryParse(param);
+            processInterface(obj);
+        }
+
+        function processInterface(obj)
+        {
+            $("input[name='param[]']").parent().parent().remove();
+            $("input[name='value[]']").parent().parent().remove();
+            devObject.fillResult('Receiving data ...');
+            $("input[name='url']").val(obj["url"]);
+            if(obj["user"] === 'sess_key'){
+                devObject.accountType = 'sess_key';
+            }else{
+                devObject.accountType = 'user_id';
+            }
+            $("input[name='user_id']").val(obj["user_id"]);
+            $("select[name='user']").val(obj["user"]);
+            obj['dataType'] = 'json';
+            if(obj.hasOwnProperty('param')){
+                for(var i in obj['param']){
+                    append("input[name='user_id']", obj['param'][i], obj['value'][i]);
+                }
+            }
+            $.post('', obj, function(ret){
+                $("select[name='user']").val(devObject.accountType);
+                devObject.fillResult(ret);
+            });
+        }
+
+        function append(item, key, value)
+        {
+            if(undefined === key){
+                key = '';
+            }
+            if(undefined === value){
+                value = '';
+            }
+            if(!$(item)){
+                return;
+            }
+            var str = "<tr><td><input type='text' name='param[]' size=25 value='"+key+"'/></td>";
+            str += "<td><input type='text' name='value[]' size='25' value='"+value+"'/>";
+            //str += "&nbsp;&nbsp;<input type='text' name='subType[]' size='20' value='"+value+"'/>";
+            str += "<a href='#ajax_interface' onclick='append(this);'>Add Param</a>&nbsp;&nbsp;";
+            str += "<a href='#ajax_interface' onclick='del(this);'>Del Param</a>";
+            str += "</td></tr>";
+            $(item).parent().parent().after(str);
+        }
+
+        function del(item)
+        {
+            $(item).parent().parent().remove();
+        }
+        $(function(){
+            $("#requestAjax").submit(function(e){
+                devObject.submitRequestAjax();
+            });
+            devObject.init();
+            var menuYloc = $("#resultDiv").offset().top;
+            $(window).scroll(function (){ 
+                var offsetTop = menuYloc + $(window).scrollTop() +"px";
+                $("#resultDiv").animate({top : offsetTop },{ duration:10 , queue:false });
+            });
+        });
+    </script>
+</html>
