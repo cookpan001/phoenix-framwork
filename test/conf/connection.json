@@ -2,24 +2,24 @@
     "mysql": {
         "*" : {
             "master": [{
-                "host": "10.0.0.10",
-                "port": 33306,
-                "user": "davdian",
-                "password": "davdian"
+                "host": "127.0.0.1",
+                "port": 3306,
+                "user": "test",
+                "password": "test"
             }],
             "slave": [{
-                "host": "10.0.0.10",
-                "port": 33306,
-                "user": "davdian",
-                "password": "davdian"
+                "host": "127.0.0.1",
+                "port": 3306,
+                "user": "test",
+                "password": "test"
             }]
         }
     },
     "redis": {
         "*" : {
-            "host": "10.0.0.10",
+            "host": "127.0.0.1",
             "port": 6379,
-            "password": "123456"
+            "password": ""
         }
     }
 }

@@ -70,6 +70,10 @@ class Redis
         try{
             $args[0] = $sha1;
             $ret = call_user_func_array(array($this->client, 'evalsha'), $args);
+            if(false === $ret){
+                $args[0] = $script;
+                return call_user_func_array(array($this->client, 'eval'), $args);
+            }
             return $ret;
         } catch (\Exception $ex) {
             if($ex->getMessage() == 'NOSCRIPT No matching script. Please use EVAL.'){
