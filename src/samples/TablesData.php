@@ -5,7 +5,7 @@ use Phoenix\Framework\Base\Database;
 /**
  * Description of TablesData
  *
- * @author zhupeng <zhupeng@davdian.com>
+ * @author cookpan001 <cookpan001@gmail.com>
  */
 class TablesData extends Database
 {

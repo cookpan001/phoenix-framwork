@@ -4,7 +4,7 @@ namespace Phoenix\Service\Tcp;
 /**
  * Description of TcpServer
  *
- * @author zhupeng <zhupeng@davdian.com>
+ * @author cookpan001 <cookpan001@gmail.com>
  */
 if(PHP_OS == 'Darwin'){
     !defined('EINVAL') && define('EINVAL', 22);/* Invalid argument */

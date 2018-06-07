@@ -8,7 +8,7 @@ use Phoenix\Framework\Base\Config;
 /**
  * Description of RedisServer
  *
- * @author zhupeng <zhupeng@davdian.com>
+ * @author cookpan001 <cookpan001@gmail.com>
  */
 class RedisServer
 {

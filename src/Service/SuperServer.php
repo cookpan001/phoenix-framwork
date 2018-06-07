@@ -18,7 +18,7 @@ use Swoole\Redis\Server;
  * 集成Http协议, Redis协议, WebSocket协议三种协议的服务端
  * Description of SuperServer
  *
- * @author zhupeng <zhupeng@davdian.com>
+ * @author cookpan001 <cookpan001@gmail.com>
  */
 abstract class SuperServer
 {

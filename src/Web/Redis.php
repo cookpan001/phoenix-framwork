@@ -5,7 +5,7 @@ use Phoenix\Framework\Route\Response;
 /**
  * Description of Redis
  *
- * @author zhupeng <zhupeng@davdian.com>
+ * @author cookpan001 <cookpan001@gmail.com>
  */
 class Redis
 {

@@ -4,7 +4,7 @@ namespace Phoenix\Framework\Cache;
 /**
  * Description of newPHPClass
  *
- * @author zhupeng <zhupeng@davdian.com>
+ * @author cookpan001 <cookpan001@gmail.com>
  */
 class Setting
 {

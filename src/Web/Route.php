@@ -6,7 +6,7 @@ use Phoenix\Framework\Route\Response;
 /**
  * Description of Route
  *
- * @author zhupeng <zhupeng@davdian.com>
+ * @author cookpan001 <cookpan001@gmail.com>
  */
 class Route
 {

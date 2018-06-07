@@ -4,7 +4,7 @@ namespace Phoenix\Framework\Base;
 /**
  * 观察者模式
  *
- * @author zhupeng <zhupeng@davdian.com>
+ * @author cookpan001 <cookpan001@gmail.com>
  */
 class Watcher
 {

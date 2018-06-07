@@ -5,7 +5,7 @@ use Phoenix\Framework\Base\Cache;
 /**
  * Description of Table
  *
- * @author zhupeng <zhupeng@davdian.com>
+ * @author cookpan001 <cookpan001@gmail.com>
  */
 class Table
 {

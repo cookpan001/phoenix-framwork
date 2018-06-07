@@ -4,7 +4,7 @@ namespace Phoenix\Framework\Base;
 /**
  * Description of Cache
  *
- * @author zhupeng <zhupeng@davdian.com>
+ * @author cookpan001 <cookpan001@gmail.com>
  */
 class Cache
 {

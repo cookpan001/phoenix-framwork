@@ -28,7 +28,7 @@ if(PHP_OS == 'Darwin'){
 /**
  * Description of Bootstrap
  *
- * @author zhupeng <zhupeng@davdian.com>
+ * @author cookpan001 <cookpan001@gmail.com>
  */
 class Bootstrap
 {

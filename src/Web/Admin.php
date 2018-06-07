@@ -4,7 +4,7 @@ namespace Phoenix\Web;
 /**
  * Description of Admin
  *
- * @author zhupeng <zhupeng@davdian.com>
+ * @author cookpan001 <cookpan001@gmail.com>
  */
 class Admin
 {

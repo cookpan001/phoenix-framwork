@@ -4,7 +4,7 @@ namespace Phoenix\Framework\Pool;
 /**
  * Description of MysqlPool
  *
- * @author zhupeng <zhupeng@davdian.com>
+ * @author cookpan001 <cookpan001@gmail.com>
  */
 class MysqlPool
 {

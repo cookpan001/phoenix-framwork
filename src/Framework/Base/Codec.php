@@ -4,7 +4,7 @@ namespace Phoenix\Framework\Base;
 /**
  * Description of Codec
  *
- * @author zhupeng <zhupeng@davdian.com>
+ * @author cookpan001 <cookpan001@gmail.com>
  */
 interface Codec
 {

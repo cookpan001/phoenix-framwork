@@ -4,7 +4,7 @@ namespace App\Middleware;
 /**
  * Description of Auth
  *
- * @author zhupeng <zhupeng@davdian.com>
+ * @author cookpan001 <cookpan001@gmail.com>
  */
 class Auth implements \Phoenix\Framework\Base\Middleware
 {
