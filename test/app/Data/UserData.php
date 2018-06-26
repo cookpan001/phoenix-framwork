@@ -4,7 +4,7 @@ namespace App\Data;
 /**
  * Description of UserData
  *
- * @author zhupeng <zhupeng@davdian.com>
+ * @author cookpan001 <cookpan001@gmail.com>
  */
 class UserData extends \Phoenix\Framework\Base\Database
 {

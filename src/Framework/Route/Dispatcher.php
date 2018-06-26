@@ -225,7 +225,7 @@ class Dispatcher
             }else{
                 $tmpUri = $arr[$n];
             }
-            if(!$this->hasUri($uri)){
+            if(!$this->hasUri($tmpUri)){
                 ++$n;
                 continue;
             }
